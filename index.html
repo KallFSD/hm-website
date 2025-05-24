@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Homem do Machado - Página Inicial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4CAF50',
+                        secondary: '#334155',
+                        background: '#f0f2f5',
+                        cardBg: '#ffffff',
+                        darkText: '#1A202C',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background flex min-h-screen">
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-secondary text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-40 flex flex-col">
+        <div class="p-6 text-2xl font-bold border-b border-gray-700">
+            O Homem do Machado
+        </div>
+        <nav class="flex-grow p-6 space-y-4">
+            <a href="index.html" class="block text-lg hover:text-primary transition duration-200">Página Inicial</a>
+            <a href="personagens.html" class="block text-lg hover:text-primary transition duration-200">Meus Personagens</a>
+            <a href="historia.html" class="block text-lg hover:text-primary transition duration-200">História</a>
+            <a href="sobre_mim.html" class="block text-lg hover:text-primary transition duration-200">Sobre Mim</a>
+        </nav>
+        <div class="p-6 border-t border-gray-700 mt-auto">
+            <h3 class="text-lg font-semibold mb-2">Perfil do Escritor</h3>
+            <div id="user-profile-status" class="flex items-center space-x-3">
+                <p class="text-gray-400">Carregando...</p>
+            </div>
+            <button id="auth-button" class="mt-4 bg-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg text-sm">
+                Entrar com Google
+            </button>
+        </div>
+    </aside>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-30 hidden md:hidden"></div>
+
+    <div class="flex-1 flex flex-col items-center py-10 px-4 md:ml-64 transition-all duration-300 ease-in-out">
+        <button id="sidebar-toggle" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-full bg-primary text-white shadow-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <div class="container w-full max-w-3xl text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-darkText mb-8">
+                Bem-vindo ao Blog "O Homem do Machado"
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+                Explore o universo sombrio e intrigante de "O Homem do Machado", uma história em desenvolvimento que promete levá-lo a um mundo de mistérios e desafios.
+            </p>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Navegue pelo menu lateral para conhecer os personagens, acompanhar o desenvolvimento da história e saber mais sobre o escritor.
+            </p>
+            <div class="mt-12">
+                <img src="https://placehold.co/600x300/334155/ffffff?text=Capa+da+Hist%C3%B3ria" alt="Imagem da Capa da História" class="w-full h-auto rounded-lg shadow-xl mx-auto">
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // [COLE SEU FIREBASE CONFIG AQUI]
+            const firebaseConfig = {
+            apiKey: "AIzaSyBPo7A-l29hXNagnJhujeTv_0lebt2saLM",
+            authDomain: "charactersdata-84ce8.firebaseapp.com",
+            projectId: "charactersdata-84ce8",
+            storageBucket: "charactersdata-84ce8.firebasestorage.app",
+            messagingSenderId: "582858816748",
+            appId: "1:582858816748:web:e3228b6c6f9fdcdb3239c9",
+            measurementId: "G-5VCXQFS14D"
+            };
+        // FIM DO FIREBASE CONFIG
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        const authButton = document.getElementById('auth-button');
+        const userProfileStatus = document.getElementById('user-profile-status');
+        const WRITER_UID = 'aHPRyGx3jtdi2X0TdCdbQtkEt4s2'; // Lembre-se de substituir este valor pelo seu UID real!
+
+        // Lógica de Autenticação
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userProfileStatus.innerHTML = `
+                    <img src="${user.photoURL || 'https://placehold.co/40x40/4CAF50/ffffff?text=EU'}" alt="Foto de Perfil" class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                    <div>
+                        <p class="text-base font-medium">${user.displayName || 'Usuário Google'}</p>
+                        <p class="text-sm text-gray-400">${user.email}</p>
+                    </div>
+                `;
+                authButton.textContent = 'Sair';
+                // Apenas para depuração:
+                console.log("Usuário logado:", user.uid);
+            } else {
+                userProfileStatus.innerHTML = `
+                    <img src="https://placehold.co/40x40/4CAF50/ffffff?text=?" alt="Usuário Deslogado" class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                    <div>
+                        <p class="text-base font-medium">Visitante</p>
+                        <p class="text-sm text-gray-400">Não Logado</p>
+                    </div>
+                `;
+                authButton.textContent = 'Entrar com Google';
+                console.log("Nenhum usuário logado.");
+            }
+        });
+
+        authButton.addEventListener('click', () => {
+            if (auth.currentUser) {
+                signOut(auth);
+            } else {
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        console.log("Usuário logado com sucesso:", result.user.uid);
+                    })
+                    .catch((error) => {
+                        console.error("Erro no login:", error);
+                        alert("Erro ao fazer login com Google. Verifique o console.");
+                    });
+            }
+        });
+
+
+        // Lógica do menu lateral (compartilhada entre as páginas)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const mainContent = document.querySelector('.flex-1');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('-translate-x-full');
+                sidebarOverlay.classList.toggle('hidden');
+                
+                if (window.innerWidth >= 768) {
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        mainContent.classList.remove('md:ml-64');
+                    } else {
+                        mainContent.classList.add('md:ml-64');
+                    }
+                }
+            }
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('-translate-x-full');
+                    mainContent.classList.add('md:ml-64');
+                    sidebarOverlay.classList.add('hidden');
+                } else {
+                    mainContent.classList.remove('md:ml-64');
+                }
+            });
+
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                mainContent.classList.add('md:ml-64');
+            }
+        });
+    </script>
+</body>
+</html>
