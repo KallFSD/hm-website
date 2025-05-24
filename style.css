@@ -1,0 +1,451 @@
+/* Importa uma fonte sem ser do Google Fonts para evitar problemas de CORS,
+   ou o usuário deve ter essa fonte instalada. Alternativamente, podemos usar fontes web seguras.
+   Para simplificar, vou usar fontes genéricas, ou podemos adicionar uma importação de Google Fonts,
+   mas para ser "convencional" sem loader externo, o ideal seria não depender de @import aqui.
+   Vamos assumir que 'Inter' será usada se disponível, caso contrário 'sans-serif'.
+*/
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* background */
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 256px; /* w-64 */
+    height: 100%;
+    background-color: #334155; /* secondary */
+    color: white;
+    transform: translateX(-100%); /* -translate-x-full */
+    transition: transform 0.3s ease-in-out;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar.md-open { /* Classe para controlar o estado aberto em MD */
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 24px; /* p-6 */
+    font-size: 2rem; /* text-2xl */
+    font-weight: bold;
+    border-bottom: 1px solid #4a5568; /* border-b border-gray-700 */
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    padding: 24px; /* p-6 */
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* space-y-4 */
+}
+
+.sidebar-nav a {
+    display: block;
+    font-size: 1.125rem; /* text-lg */
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sidebar-nav a:hover {
+    color: #4CAF50; /* primary */
+}
+
+.sidebar-footer {
+    padding: 24px; /* p-6 */
+    border-top: 1px solid #4a5568; /* border-t border-gray-700 */
+    margin-top: auto;
+}
+
+.sidebar-footer h3 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    margin-bottom: 8px; /* mb-2 */
+}
+
+.user-profile-status {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space-x-3 */
+}
+
+.user-profile-status img {
+    width: 40px; /* w-10 */
+    height: 40px; /* h-10 */
+    border-radius: 9999px; /* rounded-full */
+    object-fit: cover;
+    border: 2px solid #4CAF50; /* border-2 border-primary */
+}
+
+.user-profile-status p {
+    margin: 0;
+}
+
+.user-profile-status p:first-child {
+    font-size: 1rem; /* text-base */
+    font-weight: 500;
+}
+
+.user-profile-status p:last-child {
+    font-size: 0.875rem; /* text-sm */
+    color: #a0aec0; /* gray-400 */
+}
+
+.auth-button {
+    margin-top: 16px; /* mt-4 */
+    background-color: #4CAF50; /* primary */
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px; /* py-2 px-4 */
+    border-radius: 8px; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    transition: background-color 0.3s ease-in-out;
+    font-size: 0.875rem; /* text-sm */
+    border: none;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: #388E3C; /* green-600 */
+}
+
+/* Overlay */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0; /* top:0, right:0, bottom:0, left:0 */
+    background-color: black;
+    opacity: 0.5;
+    z-index: 30;
+    display: none; /* hidden */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1; /* flex-1 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px; /* py-10 px-4 */
+    margin-left: 0; /* Começa sem margin para mobile */
+    transition: all 0.3s ease-in-out;
+}
+
+.main-content.md-pushed { /* Classe para empurrar o conteúdo em MD */
+    margin-left: 256px; /* md:ml-64 */
+}
+
+/* Sidebar Toggle Button (Mobile) */
+.sidebar-toggle {
+    display: block; /* md:hidden */
+    position: fixed;
+    top: 16px; /* top-4 */
+    left: 16px; /* left-4 */
+    z-index: 50;
+    padding: 8px; /* p-2 */
+    border-radius: 9999px; /* rounded-full */
+    background-color: #4CAF50; /* primary */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+    border: none;
+    cursor: pointer;
+}
+@media (min-width: 768px) { /* md */
+    .sidebar-toggle {
+        display: none;
+    }
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 800px; /* max-w-3xl, max-w-4xl, max-w-5xl - usar o mais genérico ou ajustar por página */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Ajustes específicos para o container em cada página se necessário */
+.container.max-w-3xl { max-width: 768px; }
+.container.max-w-4xl { max-width: 896px; }
+.container.max-w-5xl { max-width: 1024px; }
+
+
+/* Headings */
+.heading-primary {
+    font-size: 3rem; /* text-5xl */
+    font-weight: bold;
+    color: #1A202C; /* darkText */
+    text-align: center;
+    margin-bottom: 32px; /* mb-8 */
+}
+.heading-secondary {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: bold;
+    color: #1A202C; /* darkText */
+    text-align: center;
+    margin-bottom: 32px; /* mb-8 */
+}
+.heading-tertiary { /* para Meus Personagens */
+    font-size: 2.5rem; /* text-4xl (md:text-5xl) */
+    font-weight: bold;
+    color: #1A202C; /* darkText */
+    text-align: center;
+    margin-bottom: 48px; /* mb-12 */
+}
+@media (min-width: 768px) { /* md */
+    .heading-primary { font-size: 3.75rem; /* md:text-6xl */ }
+    .heading-tertiary { font-size: 3rem; /* md:text-5xl */ }
+}
+
+
+/* Paragraphs */
+.text-lg {
+    font-size: 1.125rem;
+}
+.text-xl {
+    font-size: 1.25rem;
+}
+.text-gray-700 {
+    color: #4a5568;
+}
+.leading-relaxed {
+    line-height: 1.625;
+}
+.mb-8 {
+    margin-bottom: 32px;
+}
+.mb-4 {
+    margin-bottom: 16px;
+}
+.mb-6 {
+    margin-bottom: 24px;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.mt-12 {
+    margin-top: 48px;
+}
+.text-center {
+    text-align: center;
+}
+
+/* Image on index.html */
+.cover-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+}
+
+/* Character Grid (personagens.html) */
+.characters-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* grid-cols-1 */
+    gap: 24px; /* gap-6 */
+}
+@media (min-width: 640px) { /* sm */
+    .characters-grid {
+        grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    .characters-grid {
+        grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+    }
+}
+
+/* Character Card */
+.character-summary-card {
+    background-color: #ffffff; /* cardBg */
+    border-radius: 12px; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    padding: 24px; /* p-6 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none; /* Remover sublinhado do link */
+    color: inherit; /* Manter cor do texto herdada */
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.character-summary-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-lg */
+    transform: scale(1.05); /* hover:scale-105 */
+}
+
+.character-summary-card img {
+    width: 96px; /* w-24 */
+    height: 96px; /* h-24 */
+    border-radius: 9999px; /* rounded-full */
+    object-fit: cover;
+    border: 2px solid #4CAF50; /* border-2 border-primary */
+    margin-bottom: 16px; /* mb-4 */
+}
+
+.character-summary-card h2 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600;
+    color: #334155; /* secondary */
+    margin-bottom: 4px; /* mb-1 */
+}
+
+.character-summary-card p {
+    font-size: 1.125rem; /* text-lg */
+    color: #555; /* gray-600 */
+    margin: 0;
+}
+
+.delete-character-btn {
+    margin-top: 16px; /* mt-4 */
+    background-color: #ef4444; /* red-500 */
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px; /* py-2 px-4 */
+    border-radius: 8px; /* rounded-lg */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-character-btn:hover {
+    background-color: #dc2626; /* red-700 */
+}
+
+/* Loading Message */
+.loading-message {
+    color: #334155; /* secondary */
+    text-align: center;
+    margin-bottom: 16px; /* mb-4 */
+}
+
+
+/* Story Page (historia.html) */
+.story-box {
+    background-color: #ffffff; /* cardBg */
+    border-radius: 12px; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    padding: 32px; /* p-8 */
+    margin-bottom: 32px; /* mb-8 */
+}
+
+.story-textarea {
+    width: 100%;
+    height: 384px; /* h-96 */
+    padding: 16px; /* p-4 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 8px; /* rounded-lg */
+    outline: none; /* focus:outline-none */
+    font-family: inherit; /* usar a fonte do body */
+    color: #1F2937; /* gray-800 */
+    line-height: 1.625; /* leading-relaxed */
+    resize: vertical; /* resize-y */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.story-textarea:focus {
+    border-color: #4CAF50; /* focus:ring-2 focus:ring-primary */
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5); /* focus:ring-2 focus:ring-primary */
+}
+.story-textarea[readonly] {
+    cursor: default;
+    background-color: #f9fafb; /* light gray for readonly */
+    border-color: #d1d5db;
+}
+
+.story-actions {
+    text-align: center;
+    margin-top: 24px; /* mt-6 */
+}
+
+.save-story-btn {
+    background-color: #4CAF50; /* primary */
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px; /* py-3 px-6 */
+    border-radius: 8px; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+.save-story-btn:hover {
+    background-color: #388E3C; /* green-600 */
+    transform: scale(1.05); /* hover:scale-105 */
+}
+
+
+/* About Me Page (sobre_mim.html) */
+.about-me-box {
+    background-color: #ffffff; /* cardBg */
+    border-radius: 12px; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    padding: 32px; /* p-8 */
+}
+
+.about-me-box img {
+    width: 160px; /* w-40 */
+    height: 160px; /* h-40 */
+    border-radius: 9999px; /* rounded-full */
+    object-fit: cover;
+    border: 4px solid #4CAF50; /* border-4 border-primary */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px; /* mb-6 */
+}
+
+.about-me-box h2 {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 600;
+    color: #334155; /* secondary */
+    margin-bottom: 16px; /* mb-4 */
+}
+
+.about-me-box .text-md {
+    font-size: 1rem; /* text-md */
+    color: #718096; /* gray-500 */
+}
+.about-me-box .mt-8 {
+    margin-top: 32px;
+}
+
+/* Utility classes for JS toggling */
+.hidden {
+    display: none !important;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 767px) { /* Mobile specific styles */
+    .sidebar.md-open {
+        transform: translateX(0); /* On mobile, if open, translate to 0 */
+    }
+    .sidebar:not(.md-open) {
+        transform: translateX(-100%);
+    }
+    .main-content.md-pushed {
+        margin-left: 0; /* Reset margin on mobile if sidebar is open */
+    }
+    .sidebar-overlay.active {
+        display: block; /* Show overlay when sidebar is open */
+    }
+}
+@media (min-width: 768px) { /* Medium screens and up (md) */
+    .sidebar {
+        transform: translateX(0) !important; /* Always open on desktop */
+    }
+    .main-content {
+        margin-left: 256px; /* Always pushed on desktop */
+    }
+    .sidebar-toggle {
+        display: none; /* Hide toggle button on desktop */
+    }
+    .sidebar-overlay {
+        display: none !important; /* Hide overlay on desktop */
+    }
+}
