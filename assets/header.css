@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: beige;
+}
+
+header {
+    margin: 2vh 1.5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+header section {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border: 0px solid transparent;
+    border-radius: 100px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border: 0px solid transparent;
+    border-radius: 100px;
+}
+
+.titlebar {
+    color: brown;
+    font-size: large
+}
+
+.titlebar p {
+    font-size: 1.5em;
+}
+
+.user_configuration {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    border: 0px solid transparent;
+    border-radius: 100px;
+}
+
+nav {
+    margin: 5px 10px;
+    padding: 10px;
+    background-color: gray;
+    border: 0px solid transparent;
+    border-radius: 100px;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+}
+
+li a:hover {
+    color: cyan;
+}
+
+li a:active {
+    color: cadetblue;
+}

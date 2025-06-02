@@ -1,160 +1,143 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Homem do Machado - Página Inicial</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-background flex min-h-screen">
-    <aside id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            O Homem do Machado
-        </div>
-        <nav class="sidebar-nav">
-            <a href="index.html">Página Inicial</a>
-            <a href="personagens.html">Meus Personagens</a>
-            <a href="historia.html">História</a>
-            <a href="sobre_mim.html">Sobre Mim</a>
-        </nav>
-        <div class="sidebar-footer">
-            <h3>Perfil do Escritor</h3>
-            <div id="user-profile-status" class="user-profile-status">
-                <p class="text-gray-400">Carregando...</p>
-            </div>
-            <button id="auth-button" class="auth-button">
-                Entrar com Google
-            </button>
-        </div>
-    </aside>
+<html lang="pt-br">
+    <head>
+        <title>Página Inicial</title>
+        <link rel="stylesheet" href="assets/header.css">
+        <link rel="stylesheet" href="assets/aside.css">
+        <link rel="stylesheet" href="assets/mainstyle.css">
+        <link rel="stylesheet" href="assets/footer.css">
 
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        </style>
+        
+        <script href="script.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <section>
+                <div class="logo">
+                    <img src="assets/images/logo.jpg">
+                </div>
 
-    <div class="main-content">
-        <button id="sidebar-toggle" class="sidebar-toggle">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
+                <div class="titlebar">
+                    <p>O Homem do Machado</p>
+                </div>
 
-        <div class="container max-w-3xl text-center">
-            <h1 class="heading-primary">
-                Bem-vindo ao Blog "O Homem do Machado"
-            </h1>
-            <p class="text-lg text-gray-700 leading-relaxed mb-8">
-                Explore o universo sombrio e intrigante de "O Homem do Machado", uma história em desenvolvimento que promete levá-lo a um mundo de mistérios e desafios.
-            </p>
-            <p class="text-lg text-gray-700 leading-relaxed">
-                Navegue pelo menu lateral para conhecer os personagens, acompanhar o desenvolvimento da história e saber mais sobre o escritor.
-            </p>
-            <div class="mt-12">
-                <img src="https://placehold.co/600x300/334155/ffffff?text=Capa+da+Hist%C3%B3ria" alt="Imagem da Capa da História" class="cover-image mx-auto">
-            </div>
-        </div>
-    </div>
+                <div class="user_configuration">
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+                </div>
+            </section>
 
-        // [COLE SEU FIREBASE CONFIG AQUI]
-        const firebaseConfig = {
-            apiKey: "AIzaSyBPo7A-l29hXNagnJhujeTv_0lebt2saLM",
-            authDomain: "charactersdata-84ce8.firebaseapp.com",
-            projectId: "charactersdata-84ce8",
-            storageBucket: "charactersdata-84ce8.firebasestorage.app",
-            messagingSenderId: "582858816748",
-            appId: "1:582858816748:web:e3228b6c6f9fdcdb3239c9",
-            measurementId: "G-5VCXQFS14D"
-        };
-        // FIM DO FIREBASE CONFIG
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        const authButton = document.getElementById('auth-button');
-        const userProfileStatus = document.getElementById('user-profile-status');
-        const WRITER_UID = ''; // Lembre-se de substituir este valor pelo seu UID real!
-
-        // Lógica de Autenticação
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                userProfileStatus.innerHTML = `
-                    <img src="${user.photoURL || 'https://placehold.co/40x40/4CAF50/ffffff?text=EU'}" alt="Foto de Perfil">
-                    <div>
-                        <p class="text-base font-medium">${user.displayName || 'Usuário Google'}</p>
-                        <p class="text-sm text-gray-400">${user.email}</p>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">Página Principal<!-- Adicionar Link de Redirecionamento para Página Principal --></a>
+                    </li>
+                    <li>
+                        <a href="#">Personagens<!-- Adicionar Link para redirecionar a Página de Apresentação de Personagens --></a>
+                    </li>
+                    <li>
+                        <a href="#">História<!-- Adicionar Link para redirecionar a Página de Apresentação da História--></a>
+                    </li>
+                    <li>
+                        <a href="#">Categorias<!-- Adicionar Link para redirecionar a Página de Apresentação de Categorias de Personagens --></a>
+                    </li>
+                    <li>
+                        <a href="#">Timeline<!-- Adicionar Link para redirecionar a Página de Apresentação da Timeline --></a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#">Ajude-nos<!-- Adicionar Link para redirecionar a Página de Support Us --></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section class="main_container">    
+            <main>
+                <section class="container">
+                    <div class="header_container">
+                        <h1>Overview da História</h1>
+                        <button href="#">Ler História</button>
                     </div>
-                `;
-                authButton.textContent = 'Sair';
-                console.log("Usuário logado:", user.uid);
-            } else {
-                userProfileStatus.innerHTML = `
-                    <img src="https://placehold.co/40x40/4CAF50/ffffff?text=?" alt="Usuário Deslogado">
-                    <div>
-                        <p class="text-base font-medium">Visitante</p>
-                        <p class="text-sm text-gray-400">Não Logado</p>
+                    <div class="divisor_line"></div>
+                    <div class="content_container">
+                        <p>Algum Texto dando um Overview da História do Homem do Machado..</p>
                     </div>
-                `;
-                authButton.textContent = 'Entrar com Google';
-                console.log("Nenhum usuário logado.");
-            }
-        });
+                </section>
 
-        authButton.addEventListener('click', () => {
-            if (auth.currentUser) {
-                signOut(auth);
-            } else {
-                signInWithPopup(auth, provider)
-                    .then((result) => {
-                        console.log("Usuário logado com sucesso:", result.user.uid);
-                    })
-                    .catch((error) => {
-                        console.error("Erro no login:", error);
-                        alert("Erro ao fazer login com Google. Verifique o console.");
-                    });
-            }
-        });
+                <section class="container">
+                    <div class="header_container">
+                        <h1>Personagens</h1>
+                        <button href="#">Ver Todos os Personagens</button>
+                    </div>
+                    <div class="divisor_line"></div>
+                    <div class="content_container">
+                        <p>Algum Texto dando um Overview da História do Homem do Machado..</p>
+                    </div>
+                </section>
+            </main>
 
+            <aside>
+                <section class="container">
+                    <section class="header_container">
+                        <h1>Sobre o Autor</h1>
+                    </section>
+                    <div class="divisor_line"></div>
+                    <section class="subcontent_image_container">
+                        <img src="assets/images/author.jpg">
+                    </section>
+                    <section class="subcontent_container">
+                        <h1>Nome:</h1> <p>João Pedro Gabriel</p>
+                    </section>
+                    <section class="subcontent_container">
+                        <h1>Pseudônimo:</h1> <p>Kalleby7034</p>
+                    </section>
+                    <section class="subcontent_column_container">
+                        <section class="subcontent_header_grid_container">
+                            <h1>Hobbies/Habilidades:</h1>
+                        </section>
+                        <section class="subcontent_grid_container">
+                            <div>Programador</div>
+                            <div>Escritor</div>
+                            <div>Criador de Conteúdo</div>
+                            <div>Web Designer</div>
+                        </section>
+                    </section>
+                </section>
+            </aside>
+        </section>
+    </body>
+    
+    <footer>
+        <section class="footer_container">
+            <div class="footer_element">
+                <h1>Sobre Nós</h1>
+            </div>
+        </section>
+        <section class="footer_container">
+            <div class="footer_element">
+                <a href="#">Suporte</a>
+            </div>
+            
+            <div class="footer_element">
+                <a href="#">Contatos</a>
+            </div>
 
-        // Lógica do menu lateral (compartilhada entre as páginas)
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebar = document.getElementById('sidebar');
-            const sidebarToggle = document.getElementById('sidebar-toggle');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
-            const mainContent = document.querySelector('.main-content');
-
-            function toggleSidebar() {
-                sidebar.classList.toggle('md-open');
-                sidebarOverlay.classList.toggle('hidden');
-                
-                // Ajustar margem do conteúdo principal apenas em telas maiores
-                if (window.innerWidth >= 768) {
-                    mainContent.classList.toggle('md-pushed');
-                }
-            }
-
-            sidebarToggle.addEventListener('click', toggleSidebar);
-            sidebarOverlay.addEventListener('click', toggleSidebar);
-
-            // Ajustar o estado inicial da sidebar e main content para desktop
-            if (window.innerWidth >= 768) {
-                sidebar.classList.add('md-open');
-                mainContent.classList.add('md-pushed');
-            }
-
-            // Atualizar o estado da sidebar e main content ao redimensionar a janela
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 768) {
-                    sidebar.classList.add('md-open');
-                    mainContent.classList.add('md-pushed');
-                    sidebarOverlay.classList.add('hidden'); // Certifica que o overlay está oculto em desktop
-                } else {
-                    sidebar.classList.remove('md-open'); // Esconde sidebar em mobile
-                    mainContent.classList.remove('md-pushed'); // Remove margin em mobile
-                    sidebarOverlay.classList.add('hidden'); // Esconde overlay em mobile
-                }
-            });
-        });
-    </script>
-</body>
+            <div class="footer_element">
+                <a href="#">Termos de Uso</a>
+            </div>
+        </section>
+        <section class="footer_license">
+            <p>
+                <a href="https://kallfsd.github.io/homemdomachado">O Homem do Machado</a>
+                © 2025 by
+                <a href="https://github.com/joaopedrogabriel">João Pedro Gabriel</a>
+                is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+            </p>
+        </section>
+    </footer>
 </html>
