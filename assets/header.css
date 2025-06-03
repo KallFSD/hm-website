@@ -42,7 +42,9 @@ header section {
 
 .titlebar {
     color: brown;
-    font-size: large
+    font-size: large;
+    display: flex;
+    gap: 10px;
 }
 
 .titlebar p {
