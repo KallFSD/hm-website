@@ -2,10 +2,10 @@
 <html lang="pt-br">
     <head>
         <title>Página Inicial</title>
-        <link rel="stylesheet" href="../assets/header.css">
-        <link rel="stylesheet" href="../assets/aside.css">
-        <link rel="stylesheet" href="../assets/mainstyle.css">
-        <link rel="stylesheet" href="../assets/footer.css">
+        <link rel="stylesheet" href="assets/header.css">
+        <link rel="stylesheet" href="assets/aside.css">
+        <link rel="stylesheet" href="assets/mainstyle.css">
+        <link rel="stylesheet" href="assets/footer.css">
 
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
@@ -17,11 +17,11 @@
         <header>
             <section>
                 <div class="logo">
-                    <img src="../assets/images/logo.jpg">
+                    <img src="assets/images/logo.jpg">
                 </div>
 
                 <div class="titlebar">
-                    <h1>História:</h1><p>O Homem do Machado</p>
+                    <p>O Homem do Machado</p>
                 </div>
 
                 <div class="user_configuration">
@@ -32,13 +32,13 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="../index.html">Página Principal<!-- Adicionar Link de Redirecionamento para Página Principal --></a>
+                        <a href="index.html">Página Principal<!-- Adicionar Link de Redirecionamento para Página Principal --></a>
                     </li>
                     <li>
                         <a href="#">Personagens<!-- Adicionar Link para redirecionar a Página de Apresentação de Personagens --></a>
                     </li>
                     <li>
-                        <a href="#">História<!-- Adicionar Link para redirecionar a Página de Apresentação da História--></a>
+                        <a href="pages/history.html">História<!-- Adicionar Link para redirecionar a Página de Apresentação da História--></a>
                     </li>
                     <li>
                         <a href="#">Categorias<!-- Adicionar Link para redirecionar a Página de Apresentação de Categorias de Personagens --></a>
@@ -54,29 +54,34 @@
                 </ul>
             </nav>
         </header>
-        
-        <section class="main_container">
+        <section class="main_container">    
             <main>
                 <section class="container">
                     <div class="header_container">
-                        <h1>Sumário</h1>
+                        <h1>Termos de Uso</h1>
                     </div>
                     <div class="divisor_line"></div>
-                    <div class="header_container">
-                        <p>Temporada 1</p>
-                    </div>
-                    <div class="sumary_container">
-                        <h1>Prólogo</h1>
-                        <a href="chapters/prologue.html">
-                            <button>Ler Capítulo</button>
-                        </a>
-                    </div>
-                    <div class="sumary_container">
-                        <h1>Episódio 1</h1>
-                        <a href="chapters/first-chapter.html">
-                            <button>Ler Capítulo</button>
-                        </a>
-                       
+                    <div class="content_container">
+
+                        <div class="text-license_container">
+                            <h1>Você é livre para:</h1>
+
+                                <p><b>Compartilhar</b> - copiar e redistribuir o material em qualquer meio ou formato para qualquer finalidade, mesmo comercialmente.</p>
+
+                                <p><b>Adaptar</b> - remixar, transformar e desenvolver o material para qualquer propósito, até mesmo comercial.</p>
+
+                                <p>O licenciante não pode revogar essas liberdades, desde que você siga os termos da licença.</p>
+
+                            <h1>Nos seguintes termos:</h1>
+
+                                <p><b>Atribuição</b> - Você deve dar o devido crédito , fornecer um link para a licença e indicar se foram feitas alterações . Você pode fazê-lo de qualquer maneira razoável, mas não de forma que sugira que o licenciante endossa você ou seu uso.</p>
+                                
+                                <p><b>Sem restrições adicionais</b> - Você não pode aplicar termos legais ou medidas tecnológicas que restrinjam legalmente outros de fazerem qualquer coisa que a licença permita.</p>
+
+                        </div>
+
+
+                        <p>Para saber mais sobre a licença de uso, visite <a id="cc-link" href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></p>
                     </div>
                 </section>
             </main>
@@ -84,31 +89,34 @@
             <aside>
                 <section class="container">
                     <section class="header_container">
-                        <h1>Mais Sobre a Obra</h1>
+                        <h1>Sobre o Autor</h1>
                     </section>
                     <div class="divisor_line"></div>
-                    <section class="subcontent_column_container">
-                        <section class="subcontent_header_grid_container">
-                            <h1>Sinopse:</h1>
-                        </section>
-                        <section class="subcontent_container">
-                            <p>O fantasma de um velho lenhador, assombra o vale de Wallstreet, diante disto, João Medeiros Guimaranez, se vê curioso para desvendar os mistérios que assolam a floresta assombrada pelos contos narrativos que são passadas de seus ancestrais para os respectivos descendentes, entretanto o que João não conta, é que há muitos segredos a serem revelados a respeito de seu passado!</p>
-                        </section>
+                    <section class="subcontent_image_container">
+                        <img src="assets/images/author.jpg">
                     </section>
-
+                    <section class="subcontent_container">
+                        <h1>Nome:</h1> <p>João Pedro Gabriel</p>
+                    </section>
+                    <section class="subcontent_container">
+                        <h1>Pseudônimo:</h1> <p>Kalleby7034</p>
+                    </section>
                     <section class="subcontent_column_container">
                         <section class="subcontent_header_grid_container">
-                            <h1>Inspirações:</h1>
+                            <h1>Hobbies/Habilidades:</h1>
                         </section>
-                        <section class="subcontent_container">
-                            <p>Esta obra foi inspirada nas obras de Machado de Assis, onde ressalta com os mesmos ressoares a lucidez do cenário por trás dos personagens, e aplicando a uma trama apegante e emocionante do conto.</p>
+                        <section class="subcontent_grid_container">
+                            <div>Programador</div>
+                            <div>Escritor</div>
+                            <div>Criador de Conteúdo</div>
+                            <div>Web Designer</div>
                         </section>
                     </section>
                 </section>
             </aside>
         </section>
     </body>
-
+    
     <footer>
         <section class="footer_container">
             <div class="footer_element">
@@ -125,7 +133,7 @@
             </div>
 
             <div class="footer_element">
-                <a href="../terms-of-use.html">Termos de Uso</a>
+                <a href="#">Termos de Uso</a>
             </div>
         </section>
         <section class="footer_license">
